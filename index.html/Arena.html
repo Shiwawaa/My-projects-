@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARENA's Fast Food - Yaoundé Awae</title>
+    <style>
+        :root {
+            --primary: #ff3366; /* Vibrant pink */
+            --secondary: #00FFF4; /* Matching cyan blue for highlights */
+            --accent: #25D366; /* WhatsApp green for CTAs */
+            --bg-dark: #111;
+            --bg-medium: #222;
+            --bg-light: #000;
+            --text-light: #fff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        a { text-decoration: none; color: var(--primary); }
+        h1, h2 { color: var(--primary); text-align: center; }
+        section { padding: 40px 20px; }
+        .navbar {
+            position: sticky; top: 0; background: var(--bg-light); padding: 15px; display: flex; justify-content: space-between; align-items: center; z-index: 10;
+        }
+        .navbar .logo { font-size: 24px; color: var(--primary); }
+        .navbar ul { display: flex; list-style: none; transition: all 0.3s ease; }
+        .navbar li { margin: 0 15px; }
+        .navbar a { font-size: 18px; transition: color 0.3s; }
+        .navbar a:hover { color: var(--secondary); }
+        .hamburger { display: none; cursor: pointer; font-size: 24px; color: var(--primary); }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('logo.jpg') center/cover no-repeat;
+            padding: 100px 20px; text-align: center;
+        }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .item {
+            background: var(--bg-medium); border-radius: 15px; padding: 15px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 5px 15px rgba(255,51,102,0.3);
+        }
+        .item:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(255,51,102,0.5); }
+        .item img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
+        .price { background: var(--primary); color: var(--secondary); padding: 10px; font-weight: bold; margin-top: 10px; border-radius: 5px; }
+        .tabs { text-align: center; margin-bottom: 20px; }
+        .tabs label { background: var(--bg-medium); padding: 10px 20px; cursor: pointer; border-radius: 5px 5px 0 0; margin: 0 5px; transition: background 0.3s; }
+        .tabs label:hover { background: var(--primary); color: var(--text-light); }
+        .tabs input { display: none; }
+        .tab-content { display: none; transition: opacity 0.3s; }
+        .tabs input:checked + label { background: var(--primary); color: var(--text-light); }
+        .tabs input:checked + label + .tab-content { display: block; opacity: 1; }
+        .delivery { background: var(--bg-medium); border-radius: 15px; margin: 20px; text-align: center; }
+        .options label { display: block; margin: 10px; font-size: 18px; }
+        .btn { background: var(--accent); color: var(--text-light); padding: 15px 30px; border-radius: 50px; display: inline-block; box-shadow: 0 5px 15px rgba(37,211,102,0.4); transition: transform 0.3s; }
+        .btn:hover { transform: scale(1.05); }
+        .social { text-align: center; padding: 30px; background: var(--bg-light); }
+        .social a { font-size: 40px; margin: 15px; transition: color 0.3s; }
+        .social a:hover { color: var(--secondary); }
+        footer { background: var(--bg-light); text-align: center; padding: 20px; font-size: 14px; }
+        .king { font-size: 28px; color: var(--primary); font-weight: bold; padding: 20px; text-align: center; }
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .navbar ul { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%; background: var(--bg-light); }
+            .navbar ul.active { display: flex; }
+            .navbar li { margin: 15px 0; text-align: center; }
+            .hamburger { display: block; }
+            .tabs label { display: block; margin: 10px auto; width: 80%; }
+            .menu-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+          ARENA's Fast Food</div>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#delivery">Delivery</a></li>
+            <li><a href="#location">Location</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </nav>
+<script>
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.navbar ul');
+
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    });
+</script>
+    <header id="home" class="hero">
+        <h1>Welcome to ARENA's Fast Food</h1>
+        <p>Awae - Yaoundé | Every Customer is a King 👑</p>
+    </header>
+
+    <section id="menu">
+        <h2>Our Delicious Menu</h2>
+        <div class="tabs">
+            <input type="radio" id="tab-food" name="tab-group" checked>
+            <label for="tab-food">Food</label>
+            <div class="tab-content" id="content-food">
+                <div class="menu-grid">
+                    <div class="item">
+                        <img src="burger.jpg" alt="Classic Burger">
+                        <h3>Classic Burger</h3>
+                        <p>Beef or Chicken + Cheese + Fresh Vegetables</p>
+                        <select class="size-select" data-price-id="burger-price">
+                            <option value="800">Small - 800 FCFA</option>
+                            <option value="1500">Large - 1.500 FCFA</option>
+                        </select>
+                        <div class="price" id="burger-price">800 FCFA</div>
+                    </div>
+                    <div class="item">
+                        <img src="fries.jpg" alt="Crispy Fries">
+                        <h3>Crispy Fries</h3>
+                        <p>Golden fries with special seasoning</p>
+                        <select class="size-select" data-price-id="fries-price">
+                            <option value="500">Small - 500 FCFA</option>
+                            <option value="1000">Large - 1.000 FCFA</option>
+                        </select>
+                        <div class="price" id="fries-price">500 FCFA</div>
+                    </div>
+                    <div class="item">
+                        <img src="chicken.jpg" alt="Fried Chicken">
+                        <h3>Fried Chicken</h3>
+                        <p>Spicy or Original + Sauce</p>
+                        <select class="size-select" data-price-id="chicken-price">
+                            <option value="1000">Piece - 1.000 FCFA</option>
+                            <option value="1500">Bucket - 1.500 FCFA</option>
+                        </select>
+                        <div class="price" id="chicken-price">1.000 FCFA</div>
+                    </div>
+                    <div class="item">
+                        <img src="plats.jpg" alt="Club Sandwich">
+                        <h3>Plats de sauter</h3>
+                        <p>Pieces of meat and plantain, spaghetti & macaroni</p>
+                        <select class="size-select" data-price-id="Plats de sauter-price">
+                            <option value="800">Standard - 800 FCFA</option>
+                        </select>
+                        <div class="price" id="Plats de sauter-price">800 FCFA</div>
+                    </div>
+                    <div class="item">
+                        <img src="salade.jpg" alt="Fresh Salad Bowl">
+                        <h3>Fresh Salad Bowl</h3>
+                        <p>Healthy mix + natural dressing</p>
+                        <select class="size-select" data-price-id="salad-price">
+                            <option value="1000">Standard - 1.000 FCFA</option>
+                        </select>
+                        <div class="price" id="salad-price">1.000 FCFA</div>
+                    </div>
+                </div>
+            </div>
+
+            <input type="radio" id="tab-juice" name="tab-group">
+            <label for="tab-juice">Juices</label>
+            <div class="tab-content" id="content-juice">
+                <div class="menu-grid">
+                    <div class="item">
+                        <img src="top.png" alt="Planet / Top">
+                        <h3>Planet / Top</h3>
+                        <p>Chapman, Grenadine, or Cocktail</p>
+                        <select class="size-select" data-price-id="juice-price">
+                            <option value="350">500ml - 350 FCFA</option>
+                            <option value="700">1L - 700 FCFA</option>
+                        </select>
+                        <div class="price" id="juice-price">700 FCFA</div>
+                    </div>
+                    <!-- Add more juice items as needed, e.g., Pineapple, Mango -->
+                    <div class="item">
+                        <img src="coca.jpg" alt="Other varieties">
+                        <h3>Other varieties</h3>
+                        <p>Coca-Cola, Orangina</p>
+                        <select class="size-select" data-price-id="pineapple-price">
+                            <option value="450">500ml - 450 FCFA</option>
+                            <option value="850">1L - 850 FCFA</option>
+                        </select>
+                        <div class="price" id="pineapple-price">850 FCFA</div>
+                    </div>
+                </div>
+            </div>
+
+            <input type="radio" id="tab-natural" name="tab-group">
+            <label for="tab-natural">Natural Juices</label>
+            <div class="tab-content" id="content-natural">
+                <div class="menu-grid">
+                    <div class="item">
+                        <img src="fruit.jpg" alt="Bissap Juice">
+                        <h3>Bissap Juice</h3>
+                        <p>Fresh hibiscus with natural sweeteners</p>
+                        <select class="size-select" data-price-id="bissap-price">
+                            <option value="500">Small - 500 FCFA</option>
+                            <option value="1000">Large - 1.000 FCFA</option>
+                        </select>
+                        <div class="price" id="bissap-price">500 FCFA</div>
+                    </div>
+                    <div class="item">
+                        <img src="ginger.jpg" alt="Ginger Juice">
+                        <h3>Ginger Juice</h3>
+                        <p>Spicy ginger with lemon</p>
+                        <select class="size-select" data-price-id="ginger-price">
+                            <option value="500">Small - 500 FCFA</option>
+                            <option value="1000">Large - 1.000 FCFA</option>
+                        </select>
+                        <div class="price" id="ginger-price">500 FCFA</div>
+                    </div>
+                    <div class="item">
+                        <img src="lemon.jpg" alt="Lemonade">
+                        <h3>Lemonade</h3>
+                        <p>Fresh lemon with mint</p>
+                        <select class="size-select" data-price-id="lemonade-price">
+                            <option value="500">Small - 500 FCFA</option>
+                            <option value="1000">Large - 1.000 FCFA</option>
+                        </select>
+                        <div class="price" id="lemonade-price">500 FCFA</div>
+                    </div>
+                    <div class="item">
+                        <img src="folere.jpg" alt="Foléré Juice">
+                        <h3>Foléré Juice</h3>
+                        <p>Traditional Cameroonian hibiscus variant</p>
+                        <select class="size-select" data-price-id="folere-price">
+                            <option value="500">Small - 500 FCFA</option>
+                            <option value="1000">Large - 1.000 FCFA</option>
+                        </select>
+                        <div class="price" id="folere-price">500 FCFA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="delivery" class="delivery">
+        <h2>🚚 Delivery Options</h2>
+        <p>We deliver fast in Awae and nearby areas. Choose your speed:</p>
+        <div class="options">
+            <label>
+                <input type="radio" name="delivery-type" value="standard" checked>
+                Standard - 1.000 FCFA (30-45 min)
+            </label>
+            <label>
+                <input type="radio" name="delivery-type" value="fast">
+                Fast - 2.000 FCFA (15-25 min)
+            </label>
+        </div>
+        <a href="https://wa.me/237692095609?text=Hello%20ARENA%27s%20Fast%20Food%2C%20I%20want%20to%20order!" class="btn" id="order-btn">
+            <i class="fab fa-whatsapp"></i> Order Now
+        </a>
+    </section>
+
+    <section id="location">
+        <h2>Our Location</h2>
+        <p>Awae Junction, Yaoundé, Cameroon – Strategic spot near schools, offices, and passersby.</p>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3980.284057737249!2d11.878042975832!3d3.900184293081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x108bd57f5f5f5f5f%3A0x5f5f5f5f5f5f5f5f!2sAwae!5e0!3m2!1sen!2sca!4v1730000000000" width="100%" height="450" style="border:0; border-radius:10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <p>Opening Hours: Monday - Saturday: 5:00 AM - 10:00 PM</p>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>At ARENA’s Fast Food, our mission is to serve delicious, high-quality food with speed and care in a clean, friendly environment for students, workers, and urban residents in Yaoundé.</p>
+        <p>Vision: To become one of Cameroon's most popular, trusted, tasty, and hygienic fast food brands within 5 years, known for quality meals, modern ambiance, and excellent service.</p>
+        <p>Objectives: Open first branch by June 2026, achieve top status in 2 years, maintain 4.5+ star satisfaction, expand to second branch by 2028.</p>
+        <p>Our Team: NGONO GAËLLE, EYENGA ROSE, BELIBI NDONGO, ENGBANG CHRISTIAN, NNOMO EDZOA, NDINGA ANABA.</p>
+        <img src="team.jpg" alt="Our Team" style="width:100%; max-width:600px; display:block; margin:20px auto; border-radius:10px;">
+    </section>
+
+    <div class="king">
+        COMMERCIAL POLICY: EVERY CUSTOMER IS A KING 👑
+    </div>
+
+    <div class="social">
+        <p>Follow us everywhere!</p>
+        <a href="https://www.tiktok.com/@andymiguel05?_r=1&_t=ZM-91caFXZVvZ2" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.instagram.com/andymiguel94?igsh=MXR3Ymc4NmRxMWlidw==" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://x.com/AndyMiguel795?s=09" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.facebook.com/share/1BhxkGZRwK/" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+
+    <footer>
+        © 2025 ARENA's Fast Food - Made by Andy 😎🤏
+    </footer>
+
+    <script>
+        // Interactive prices
+        document.querySelectorAll('.size-select').forEach(select => {
+            select.addEventListener('change', () => {
+                const priceId = select.dataset.priceId;
+                const priceElement = document.getElementById(priceId);
+                priceElement.textContent = select.value + ' FCFA';
+            });
+        });
+
+        // Dynamic delivery link
+        const deliveryInputs = document.querySelectorAll('input[name="delivery-type"]');
+        const orderBtn = document.getElementById('order-btn');
+        deliveryInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                const type = input.value === 'standard' ? 'Standard Delivery (1.000 FCFA, 30-45 min)' : 'Fast Delivery (2.500 FCFA, 5-15 min)';
+                orderBtn.href = `https://wa.me/message/LOFYENDODBIDH1?text=Hello%20ARENA%27s%2C%20I%20want%20to%20order%20with%20${encodeURIComponent(type)}`;
+            });
+        });
+
+        // For tabs: Ensure only checked content shows (CSS handles most, JS for robustness)
+        const tabInputs = document.querySelectorAll('.tabs input');
+        tabInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.style.display = 'none';
+                });
+                const contentId = input.id.replace('tab-', 'content-');
+                document.getElementById(contentId).style.display = 'block';
+            });
+        });
+        // Initial show
+        document.querySelector('.tab-content').style.display = 'block';
+    </script>
+
+</body>
+</html>
